@@ -1,8 +1,9 @@
 import tkinter as t
 from src.gui.views.tab_select import ViewSelector, ViewOption
 from src.gui.views.config import ConfigView
-from src.gui.views.view import View
-from typing import NamedTuple
+from src.gui.views.video import VideoView
+from multiprocessing import SimpleQueue
+from typing import Callable, NamedTuple, Set
 
 
 class Views(NamedTuple):
@@ -11,10 +12,7 @@ class Views(NamedTuple):
 
 
 class Window(t.Frame):
-    def __init__(
-        self,
-        master: t.Tk,
-    ) -> None:
+    def __init__(self, master: t.Tk, frame_buffer: SimpleQueue) -> None:
         super().__init__(master)
         self.master = master
         self.root = master
@@ -32,7 +30,7 @@ class Window(t.Frame):
         self.grid_columnconfigure(0, weight=1)
 
         cfg = ConfigView(self)
-        video = View(self, background="#ffaa55")
+        video = VideoView(self, frame_buffer)
 
         views = Views(
             ViewOption("config", cfg),
@@ -40,7 +38,3 @@ class Window(t.Frame):
         )
         vs = ViewSelector(self, views, views.video.name)
         vs.grid()
-
-
-root = t.Tk()
-app = Window(root)
