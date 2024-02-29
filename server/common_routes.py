@@ -14,6 +14,12 @@ async def js():
         return Response(response=js.read(), content_type="text/javascript")
 
 
+@app.route("/state.js")
+async def state_js():
+    with open("client/state.js", "rt") as js:
+        return Response(response=js.read(), content_type="text/javascript")
+
+
 @app.route("/style.css")
 async def css():
     with open("client/style.css", "rt") as css:
