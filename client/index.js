@@ -1,3 +1,5 @@
+import { StateRequest } from "./state.js";
+
 class Section {
   name = "";
 
@@ -41,10 +43,11 @@ class VideoSection extends Section {
     this.name = "Video";
     this.original = this.#videoOutput("original");
     this.final = this.#videoOutput("final");
+    this.state = this.#state();
   }
 
   apply() {
-    super.apply(this.original, this.final);
+    super.apply(this.original, this.final, this.state);
   }
 
   #videoOutput(url_segment) {
@@ -59,6 +62,30 @@ class VideoSection extends Section {
     container.classList.add("video-container");
     container.append(title, img);
     return container;
+  }
+
+  #state() {
+    const entrypointContainer = document.createElement("div");
+    entrypointContainer.classList.add("state-container");
+    const entrypointStart = document.createElement("input");
+    entrypointStart.type = "button";
+    entrypointStart.value = "Start";
+    entrypointStart.classList.add("entrypoint-button");
+    entrypointStart.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      StateRequest.entrypoint.send("start");
+    });
+    const entrypointStop = document.createElement("input");
+    entrypointStop.type = "button";
+    entrypointStop.value = "Stop";
+    entrypointStop.classList.add("entrypoint-button");
+    entrypointStop.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      StateRequest.entrypoint.send("stop");
+    });
+
+    entrypointContainer.append(entrypointStart, entrypointStop);
+    return entrypointContainer;
   }
 }
 

@@ -39,3 +39,19 @@ body {
 .section-nav-button:not(:last-child) {
   margin-right: 0.3rem;
 }
+
+.entrypoint-button {
+  width: 80px;
+  height: 20px;
+}
+
+.entrypoint-button:not(:last-child) {
+  margin-right: 0.3rem;
+}
+
+.state-container {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
