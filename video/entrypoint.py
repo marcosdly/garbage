@@ -1,10 +1,9 @@
-from video.globals import InitConfig, InitConfigType
-from pyrsistent import freeze
+from typing import Dict, Any
+from video.globals import set_config
 
 
-def main(**kw: InitConfigType):
-  InitConfig.update(kw.items())
-  freeze(InitConfig)
+def main(**kw: Dict[str, Any]):
+  set_config(**kw)
 
   from video.mainloop import mainloop
 
