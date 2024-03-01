@@ -24,8 +24,10 @@ export default vite.defineConfig(({ mode }) => {
       legalComments: "none",
     },
     build: {
+      outDir: "dist/client",
       target: "modules",
       assetsInlineLimit: 0,
+      copyPublicDir: true,
       cssMinify: true,
       minify: mode === "prod" ? "terser" : "esbuild",
       assetsDir: "",
