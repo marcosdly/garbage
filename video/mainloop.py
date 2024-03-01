@@ -1,5 +1,7 @@
 import cv2 as cv
-from video.net.video import VideoStreams
+from video.globals import InitConfig
+from video.state import Windows
+from video.analyze_sprites import find_sprite
 
 
 def mainloop() -> None:
@@ -10,6 +12,11 @@ def mainloop() -> None:
     ok, frame = cap.read()
     if not ok:
       continue
-    _, frame = cv.imencode(".ppm", frame)
-    VideoStreams.original.send(bytes(frame))
+    # canny = cv.Canny(frame, 400, 400)
+    # cv.imshow(Windows.ORIGINAL, cv.resize(frame, (640, 360)))
+    # cv.imshow(Windows.FILTER, cv.resize(canny, (640, 360)))
+    path, matches_num = find_sprite(frame)
+    if cv.waitKey(1) == ord("q"):
+      cv.destroyAllWindows()
+      break
   cap.release()
