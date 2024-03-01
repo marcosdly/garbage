@@ -4,7 +4,7 @@ from typing import NamedTuple
 
 
 class VideoQueueType(NamedTuple):
-    original: Queue = Queue(1)
+  original: Queue = Queue(1)
 
 
 VideoQueue = VideoQueueType()
