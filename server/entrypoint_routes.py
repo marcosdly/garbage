@@ -22,7 +22,10 @@ async def state():
     if data["state"] == "start":
       url = urlparse(request.base_url)
       VideoProcess.new_process(
-        host=url.hostname, port=url.port, url=f"{url.scheme}://{url.netloc}"
+        host=url.hostname,
+        port=url.port,
+        url=f"{url.scheme}://{url.netloc}",
+        size=(1280, 720),
       )
       VideoProcess.proc.start()
       return Response(status=200)
