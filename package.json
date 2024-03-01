@@ -1,0 +1,30 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "cdnAlias": {
+    "replace": {},
+    "npm": {
+      "preact": "dist/preact.min.module.js"
+    }
+  },
+  "dependencies": {
+    "preact": "10.19.5"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "2.8.1",
+    "@types/node": "20.11.24",
+    "@types/web": "0.0.140",
+    "hex-to-css-filter": "5.4.0",
+    "prettier": "3.2.5",
+    "sass": "1.71.1",
+    "typescript": "5.2.2",
+    "vite": "5.1.4"
+  }
+}

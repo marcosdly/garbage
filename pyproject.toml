@@ -1,0 +1,36 @@
+[tool.pyright]
+
+include = [
+    "video",
+    "server"
+]
+exclude = [
+    "**/__pycache__"
+]
+venvPath = "."
+venv = ".venv"
+pythonPlatform = "Linux"
+
+reportOptionalMemberAccess = "none"
+
+[tool.ruff]
+
+fix = true
+respect-gitignore = true
+line-length = 88
+indent-width = 2
+target-version = "py311"
+src = ["src"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.flake8-quotes]
+
+docstring-quotes = "double"
+inline-quotes = "double"
+multiline-quotes = "double"

@@ -14,5 +14,6 @@
   "search.sortOrder": "type",
   "search.quickOpen.history.filterSortOrder": "recency",
   "scm.repositories.sortOrder": "name",
-  "scm.defaultViewSortKey": "status"
+  "scm.defaultViewSortKey": "status",
+  "mypy.runUsingActiveInterpreter": true
 }
