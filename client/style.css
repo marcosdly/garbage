@@ -16,19 +16,9 @@ body {
   align-items: center;
 }
 
-.video-output {
-  min-height: calc(1080px * 0.3);
-  min-width: calc(1920px * 0.3);
-  border: 1px dashed black;
-  border-radius: 10px;
-}
-
-.video-title {
-  text-align: center;
-}
-
 #section-nav {
   margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .section-nav-button {
@@ -40,18 +30,19 @@ body {
   margin-right: 0.3rem;
 }
 
-.entrypoint-button {
-  width: 80px;
-  height: 20px;
-}
-
-.entrypoint-button:not(:last-child) {
-  margin-right: 0.3rem;
-}
-
 .state-container {
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#message {
+  width: 600px;
+  margin-bottom: 1rem;
+  color: darkred;
+}
+
+.green-text {
+  color: darkgreen;
 }

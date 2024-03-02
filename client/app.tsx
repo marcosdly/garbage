@@ -7,10 +7,11 @@ export function App() {
   return (
     <>
       <nav id="section-nav">
-        <SectionButton name={"video"} setState={setSection} />
+        <SectionButton name="video" setState={setSection} />
+        <SectionButton name="character" setState={setSection} />
       </nav>
       <div id="message-container">
-        <p id="message"></p>
+        <input id="message" type="text" disabled></input>
       </div>
       <div id="section">
         <Section />

@@ -1,4 +1,5 @@
 import { StateRequest } from "../state";
+import "./video.scss";
 
 function VideoOutput({ url_segment }: Record<string, string>) {
   url_segment = url_segment as string;
