@@ -3,5 +3,6 @@ if __name__ == "__main__":
   import server.common_routes
   import server.entrypoint_routes
   import server.video_routes
+  import server.character_routes
 
   app.run()
