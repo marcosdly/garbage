@@ -135,7 +135,7 @@ function ImageSelect({ id, title, type, characterState }: ImageSelectArgs) {
           value={placeholder}
           onPaste={pasteImage}
           onChange={change}
-          spellCheck={false}
+          spellcheck={false}
           className="char-imageselect-button char-imageselect-paste"
         />
         <input
@@ -175,7 +175,7 @@ function Player() {
           />
           <ImageSelect
             id="player-back"
-            title="Trás"
+            title="Costas"
             type="player"
             characterState="back"
           />
@@ -199,7 +199,7 @@ function Enemy() {
           />
           <ImageSelect
             id="enemy-back"
-            title="Trás"
+            title="Costas"
             type="enemy"
             characterState="back"
           />
