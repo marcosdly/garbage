@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { greenGeneralMessage, redGeneralMessage } from "../topLevel";
 import "./character.scss";
 import { ChangeEvent } from "preact/compat";
@@ -35,24 +35,23 @@ function redMessage(id: string) {
 
 function ImageSelect({ id, title, type, characterState }: ImageSelectArgs) {
   const [state, setState] = useState({} as CharState);
+  const requestUrl = window.origin + `/app/character/${type}/${characterState}`;
+  const requestHeaders = {
+    "Content-Transfer-Encoding": "base64",
+  };
 
   const submit = async (ev: MouseEvent) => {
     ev.preventDefault();
     if (!state.base64 || !state.base64url) return;
 
     // type === "enemy"; frame === "front"
-    const req = new Request(
-      window.origin + `/app/character/${type}/${characterState}`,
-      {
-        body: state.base64,
-        method: "POST",
-        cache: "no-cache",
-        keepalive: true,
-        headers: {
-          "Content-Transfer-Encoding": "base64",
-        },
-      },
-    );
+    const req = new Request(requestUrl, {
+      body: state.base64,
+      method: "POST",
+      cache: "no-cache",
+      keepalive: true,
+      headers: requestHeaders,
+    });
 
     await fetch(req).then((resp) => {
       if (resp.status === 200)
@@ -96,11 +95,41 @@ function ImageSelect({ id, title, type, characterState }: ImageSelectArgs) {
     (ev.currentTarget as HTMLInputElement).value = placeholder;
   };
 
+  const setImage = () => {
+    const req = new Request(requestUrl, {
+      method: "GET",
+      keepalive: true,
+      headers: requestHeaders,
+    });
+    fetch(req).then(async (resp) => {
+      if (resp.status === 200)
+        greenGeneralMessage("Imagem de personagem buscada com sucesso");
+      else {
+        redGeneralMessage("Erro ao buscar imagem de personagem");
+        return;
+      }
+
+      const encoded = await resp.text();
+
+      setState({
+        base64: encoded,
+        base64url: `data:image/png;base64,${encoded}`,
+        message: "",
+      });
+    });
+  };
+
+  useEffect(setImage, []);
+
   return (
     <>
       <div className="char-imageselect-container" id={id as string}>
         <h3 className="char-imageselect-title">{title as string}</h3>
-        <img className="char-imageselect-preview" src={state.base64url} />
+        <img
+          src={state.base64url}
+          alt={`${type} ${characterState}`}
+          className="char-imageselect-preview"
+        />
         <input
           type="text"
           value={placeholder}
@@ -114,6 +143,12 @@ function ImageSelect({ id, title, type, characterState }: ImageSelectArgs) {
           value="Confirmar"
           onClick={submit}
           className="char-imageselect-button char-imageselect-submit"
+        />
+        <input
+          type="button"
+          value="Carregar original"
+          onClick={setImage}
+          className="char-imageselect-button"
         />
         <input
           type="text"
