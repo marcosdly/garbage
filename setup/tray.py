@@ -1,6 +1,4 @@
-from datetime import datetime, timedelta
-from gc import enable
-import os
+from datetime import datetime
 from pathlib import Path
 from pystray import Icon, MenuItem
 from setup.process import Manager as manager
