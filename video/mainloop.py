@@ -1,22 +1,29 @@
 import cv2 as cv
-from video.globals import InitConfig
-from video.state import Windows
-from video.analyze_sprites import find_sprite
 
 
-def mainloop() -> None:
-  cap = cv.VideoCapture(2, cv.CAP_DSHOW)
-  cap.set(cv.CAP_PROP_FRAME_WIDTH, 1920)
-  cap.set(cv.CAP_PROP_FRAME_HEIGHT, 1080)
+def mainloop(shared_stop_bool) -> bool:
+  """Processing's main loop
+
+  Args:
+      shared_stop_bool (bool): shared boolean signal, check for "stop" signal from user
+
+  Returns:
+      bool: status code
+  """
+  obs_cap = 2
+  size = (1920, 1080)
+  cap = cv.VideoCapture(obs_cap, cv.CAP_DSHOW)
+  cap.set(cv.CAP_PROP_FRAME_WIDTH, size[0])
+  cap.set(cv.CAP_PROP_FRAME_HEIGHT, size[1])
   while cap.isOpened():
+    with shared_stop_bool.get_lock():
+      if shared_stop_bool.value:
+        cv.destroyAllWindows()
+        return True
+
     ok, frame = cap.read()
     if not ok:
       continue
-    # canny = cv.Canny(frame, 400, 400)
-    # cv.imshow(Windows.ORIGINAL, cv.resize(frame, (640, 360)))
-    # cv.imshow(Windows.FILTER, cv.resize(canny, (640, 360)))
-    path, matches_num = find_sprite(frame)
-    if cv.waitKey(1) == ord("q"):
-      cv.destroyAllWindows()
-      break
-  cap.release()
+
+    cv.imshow("asdf", frame)
+    cv.waitKey(1)
