@@ -2,7 +2,8 @@
 
 include = [
     "video",
-    "server"
+    "server",
+    "setup"
 ]
 exclude = [
     "**/__pycache__"
@@ -19,8 +20,11 @@ fix = true
 respect-gitignore = true
 line-length = 88
 indent-width = 2
-target-version = "py311"
-src = ["src"]
+target-version = "py312"
+src = ["video", "server", "setup"]
+
+[tool.lint]
+
 ignore = ["E501"]
 
 [tool.ruff.format]
@@ -28,9 +32,31 @@ ignore = ["E501"]
 indent-style = "space"
 line-ending = "lf"
 quote-style = "double"
+docstring-code-format = true
+docstring-code-line-length = 60
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 
 docstring-quotes = "double"
 inline-quotes = "double"
 multiline-quotes = "double"
+
+[tool.ruff.lint.pycodestyle]
+
+max-doc-length = 88
+max-line-length = 88
+ignore-overlong-task-comments = false
+
+[tool.ruff.lint.pydocstyle]
+
+convention = "google"
+
+[tool.mypy]
+
+strict = false
+allow_redefinition = true
+
+disable_error_code = [
+  "call-overload",
+  "import-untyped"
+]

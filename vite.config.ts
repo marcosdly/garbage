@@ -31,6 +31,7 @@ export default vite.defineConfig(({ mode }) => {
       cssMinify: true,
       minify: mode === "prod" ? "terser" : "esbuild",
       assetsDir: "",
+      sourcemap: true,
       terserOptions: {
         format: { comments: false },
       },
@@ -48,6 +49,9 @@ export default vite.defineConfig(({ mode }) => {
   let productionDefaults: vite.UserConfig = {
     resolve: {
       alias: cdn.aliases,
+    },
+    build: {
+      sourcemap: false,
     },
   };
 
