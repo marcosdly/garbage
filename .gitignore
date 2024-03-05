@@ -189,3 +189,8 @@ dist-ssr
 *.sw?
 
 pnpm-lock.yaml
+yolov4-tiny/yolov4-tiny-custom.cfg
+yolov4-tiny/obj.zip
+dataset*/
+*.bkp
+obj/
