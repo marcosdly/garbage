@@ -1,5 +1,5 @@
-classes = 2
-train  = data/train.txt
-valid  = data/test.txt
-names = data/obj.names
-backup = /mydrive/yolov4-tiny/training
+classes = {LABEL_AMOUNT}
+train  = obj/train.txt
+valid  = obj/test.txt
+names = obj.names
+backup = /workspace/training
