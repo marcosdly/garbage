@@ -1,7 +1,8 @@
 import cv2 as cv
+from video.framework import Darknet
 
 
-def mainloop(shared_stop_bool) -> bool:
+def mainloop() -> bool:
   """Processing's main loop
 
   Args:
@@ -10,20 +11,16 @@ def mainloop(shared_stop_bool) -> bool:
   Returns:
       bool: status code
   """
-  obs_cap = 2
   size = (1920, 1080)
-  cap = cv.VideoCapture(obs_cap, cv.CAP_DSHOW)
+  dnn = Darknet()
+  cap = cv.VideoCapture("C:\\Users\\gabas\\Videos\\tibia_swamp_cave.mp4", cv.CAP_FFMPEG)
   cap.set(cv.CAP_PROP_FRAME_WIDTH, size[0])
   cap.set(cv.CAP_PROP_FRAME_HEIGHT, size[1])
   while cap.isOpened():
-    with shared_stop_bool.get_lock():
-      if shared_stop_bool.value:
-        cv.destroyAllWindows()
-        return True
-
     ok, frame = cap.read()
     if not ok:
-      continue
+      print("video stream ended (or error?); exiting...")
+      break
 
-    cv.imshow("asdf", frame)
-    cv.waitKey(1)
+    dnn.detect(frame)
+    dnn.draw_labels(imshow=True)
