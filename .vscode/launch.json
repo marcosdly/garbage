@@ -2,10 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Module 'src'",
+      "name": "Module 'setup'",
       "type": "debugpy",
       "request": "launch",
-      "module": "src"
+      "module": "setup"
+    },
+    {
+      "name": "Module 'video'",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "video"
     }
   ]
 }
